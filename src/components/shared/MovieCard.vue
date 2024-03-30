@@ -54,7 +54,7 @@ watch(movies, (newMovie) => {
   >
   <v-card-actions class="pa-0"  @click.stop="pushMovie(movie)">
     <v-btn>
-        <v-icon size="32" :color="isSaved(movie) ? 'yellow' : 'black'"  >mdi-bookmark</v-icon>
+        <v-icon size="40" :color="isSaved(movie) ? 'yellow' : 'white'"  >mdi-bookmark</v-icon>
       </v-btn>
           </v-card-actions>
   </v-card>
