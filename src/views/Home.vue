@@ -55,7 +55,7 @@ const { data: byPeers, isFetching: isFetchingPeers } = useQuery({
         limit: 50,
       },
     });
-  console.log(response.data.data?.movies as Movie[])
+
     return response.data.data?.movies as Movie[];
   },
 });

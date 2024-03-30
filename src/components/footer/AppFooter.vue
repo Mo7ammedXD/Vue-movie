@@ -9,8 +9,8 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
-      <v-btn>
-        <v-icon>mdi-bookmark</v-icon>
+      <v-btn :class="{ 'bg-yellow': isSavesActive }" to="/saves">
+        <v-icon >mdi-bookmark</v-icon>
       </v-btn>
     </v-bottom-navigation>
   </v-footer>
@@ -24,6 +24,8 @@ const route = useRoute();
 
 const isHomeActive = computed(() => route.path === '/');
 const isSearchActive = computed(() => route.path === '/search');
+const isSavesActive = computed(() => route.path === '/saves');
+
 </script>
 
 

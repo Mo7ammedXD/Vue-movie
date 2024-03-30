@@ -21,6 +21,11 @@ const routes = [
         name: "Movie",
         component: () => import("@/views/Movie.vue"),
       },
+      {
+        path: "/saves",
+        name: "Saves",
+        component: () => import("@/views/Saves.vue"),
+      },
     ],
   },
 ];

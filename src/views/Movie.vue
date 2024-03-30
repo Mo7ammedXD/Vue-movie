@@ -47,7 +47,7 @@
             </v-window-item>
 
             <v-window-item value="three">
-              {{ moiveNow?.description_full }}
+             <p class="story">{{ moiveNow?.description_full }}</p>
             </v-window-item>
           </v-window>
         </v-card-text>
@@ -89,7 +89,6 @@ onMounted(async () => {
   moiveNow.value = await appStore.fetchMovie(
     Number.parseInt(vueRouter.params.id as string)
   );
-  console.log(moiveNow.value);
 });
 </script>
 <style scoped>
@@ -151,5 +150,12 @@ onMounted(async () => {
   box-shadow: inset 0px -20px 12px 0px #0000009c;
   position: relative;
   top: -42px;
+}
+.story {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #333;
+  padding: 20px;
+
 }
 </style>
