@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", "Rubik";
+
+
+}
+.body{
+  color: white;
+  background-color: black;
+
+}
+.text-poppins{
+  font-family: "Poppins", sans-serif;
+}
+.v-main{
+  background-color: black;
+}
+body {
+    color: black;
+    font-family: "Poppins", sans-serif;
+
+  }
+  .bg-black {
+    background-color: black;
+  }
+  .bg-yellow {
+    background-color: #FFC700;
+  }
+  .bg-yellow-400 {
+    background-color: #ffc700d9;
+  }
+  .text-yellow {
+    color: #FFC700;
+  }
+  
+  .bf-discrption {
+    color: #888888;
+  }
+  .text-discrption {
+    color: #888888;
+  }
+  .input-filed {
+    background-color: #2B2B2B;
+    color: rgba(255, 255, 255, 0.800);
+  }
+
+  //font weight
+
+  .font-weight-light {
+    font-weight: lighter !important;
+  }
+  
+  .font-weight-normal {
+    font-weight: normal !important;
+  }
+  
+  .font-weight-medium {
+    font-weight: 500 !important;
+  }
+  
+  .font-weight-bold {
+    font-weight: 400 !important;
+  }
+  
+  .font-weight-bolder {
+    font-weight: 700 !important;
+  }
+  .font-weight-bolder-max {
+    font-weight: 900 !important;
+  }
+  .font-italic {
+    font-style: italic !important;
+  }
+  
+  .text-uppercase {
+    text-transform: uppercase !important;
+  }
+  
+  .text-lowercase {
+    text-transform: lowercase !important;
+  }
+  
+  .text-capitalize {
+    text-transform: capitalize !important;
+  }
+  
+  .text-left {
+    text-align: left !important;
+  }
+  
+  .text-right {
+    text-align: right !important;
+  }
+  
+  .text-center {
+    text-align: center !important;
+  }
+  
+  .text-justify {
+    text-align: justify !important;
+  }
+  
+  .justify-conten {
+    justify-content: space-around;
+  }
+
+  .text-no-wrap {
+    white-space: nowrap !important;
+  }
+
+
+
+  .horizontal-scroll {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  //scroll 
+  ::-webkit-scrollbar {
+    
+    width: 16px; 
+    height: 12px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    background-color: #888;
+    border-radius: 5px; 
+  }
+
+// FONT SIZE 
+.fa-1x{
+  font-size: 1.5em;
+}
+.fa0-5x{
+  font-size: 0.6em;
+}
+.d-grid-center{
+  display: grid;
+  justify-content: center;
+}
