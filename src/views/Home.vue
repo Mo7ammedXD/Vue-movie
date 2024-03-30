@@ -62,8 +62,9 @@ const { data: byPeers, isFetching: isFetchingPeers } = useQuery({
 </script>
 
 <template>
-  <div class="ma-4">
-    <h2 class="text-white">By Rating</h2>
+   <v-card class="mx-auto" color="black" width="95%">
+  <div class="ma-4 mb-4 bg-movie mb-10 pa-6">
+    <h2 class="text-white ">By Rating</h2>
     <div class="horizontal-scroll d-flex ">
       <div v-for="movie in byRating" :key="movie.id" class="item me-4">
       <MovieCard :movie="movie"></MovieCard>
@@ -71,7 +72,7 @@ const { data: byPeers, isFetching: isFetchingPeers } = useQuery({
     </div>
   </div>
 
-  <div class="ma-4 mb-4">
+  <div class="ma-4 mb-4 bg-movie mb-10 pa-6">
     <h2 class="text-white">By Donwload</h2>
     <div class="horizontal-scroll d-flex">
       <div v-for="movie in byDownload" :key="movie.id" class="item me-4">
@@ -82,7 +83,7 @@ const { data: byPeers, isFetching: isFetchingPeers } = useQuery({
     </div>
   </div>
 
-  <div class="ma-4 mb-4">
+  <div class="ma-4 mb-4  mb-10 pa-6">
     <h2 class="text-white">Coming Soon</h2>
   <v-carousel
     color="primary"
@@ -104,24 +105,15 @@ const { data: byPeers, isFetching: isFetchingPeers } = useQuery({
 
 
 
-  <v-container class="">
+  <v-container class="bg-movie pa-6">
     <h2 class="text-white">The Most Popular</h2>
 
-    <v-row no-gutters class>
-      <v-col
-      v-for="movie in byPeers"
-      :key="movie.id"
-        cols="12"
-        sm="4"
-        class="item mb-10"
-      >
-
-           <MovieCard :movie="movie"></MovieCard>
-
-      </v-col>
+    <v-row no-gutters class="mb-10 ">
+      <div v-for="movie in byDownload" :key="movie.id" class="item ">
+        <MovieCard :movie="movie"></MovieCard>
+      </div>
     </v-row>
   </v-container>
+</v-card>
 </template>
-<style scoped>
 
-</style>

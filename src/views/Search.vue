@@ -1,37 +1,29 @@
 <template>
-  <v-card class="mx-auto" color="black" width="95%">
+  <v-card class="mx-auto" color="black" width="98%">
     <v-card-text >
       <v-text-field
-
-        :loading="isFetchingPeers"
-        density="compact"
-        variant="solo"
-        label="Search templates"
-        append-inner-icon="mdi-magnify"
-        single-line
-        hide-details
-        v-model="userSearch"
-        @click:append-inner="onClick()"
-        @keyup.enter="onClick()"
-      ></v-text-field>
+      color="primary"
+    :loading="isFetchingPeers"
+    density="compact"
+  variant="outlined"
+  label="Search for movies"
+  append-inner-icon="mdi-magnify"
+  single-line
+  hide-details
+  v-model="userSearch"
+  @click:append-inner="onClick()"
+  @keyup.enter="onClick()"
+></v-text-field>
     </v-card-text>
 
 
-  <v-container >
+  <v-container class="bg-movie" >
     <h2 class="text-white">Search</h2>
 
 <v-row no-gutters  >
-  <v-col
-  v-for="movie in search"
-  :key="movie.id"
-    cols="12"
-    sm="4"
-    class="item mb-10 "
-  >
-
-       <MovieCard  :movie="movie"></MovieCard>
-
-  </v-col>
+  <div v-for="movie in search" :key="movie.id" class="item ">
+        <MovieCard :movie="movie"></MovieCard>
+      </div>
 </v-row>
   </v-container>
 
@@ -41,7 +33,7 @@
   </v-card>
 </template>
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import type { Movie } from "@/types/Movie";
 import { useQuery } from "@tanstack/vue-query";
 import { list_movies } from "@/helper/axios";

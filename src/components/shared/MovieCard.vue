@@ -20,7 +20,7 @@ const navigateToMovie = (movieId: number) => {
 <template>
   <v-card
     @click="navigateToMovie(movie.id)"
-    class="mx-1"
+    class="bg-yellow"
     :image="movie.large_cover_image"
     max-width="300"
     height="240"
