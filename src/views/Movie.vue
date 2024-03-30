@@ -1,5 +1,5 @@
 <template>
-  <div class="d-sm-flex d-md-none px-5 py-4">
+  <div class="d-md-flex d-md-none px-5 py-4">
     <v-card color="black" class="ma-auto">
       <v-img :src="moiveNow?.large_cover_image" class="object-fit-contain">
       </v-img>
@@ -26,12 +26,13 @@
               </div>
               <v-row class="ma-auto" >
                 <v-chip
+
                 variant="flat"
                   v-for="(genre, index) in moiveNow?.genres"
                   :key="index"
                   :color="getOrderStatusColor(genre)"
                 >
-                  <h4>{{ genre }}</h4>
+                  <p>{{ genre }}</p>
                 </v-chip></v-row
               >
             </v-window-item>
@@ -89,6 +90,7 @@ onMounted(async () => {
   moiveNow.value = await appStore.fetchMovie(
     Number.parseInt(vueRouter.params.id as string)
   );
+
 });
 </script>
 <style scoped>
