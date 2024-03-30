@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" color="black" width="98%">
+   <v-card class="mx-auto" color="black" width="100%">
     <v-card-text >
       <v-text-field
       color="primary"
@@ -17,7 +17,7 @@
     </v-card-text>
 
 
-  <v-container class="bg-movie" >
+  <v-container class="bg-movie ">
     <h2 class="text-white">Search</h2>
 
 <v-row no-gutters  >

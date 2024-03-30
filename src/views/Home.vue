@@ -62,7 +62,7 @@ const { data: byPeers, isFetching: isFetchingPeers } = useQuery({
 </script>
 
 <template>
-   <v-card class="mx-auto" color="black" width="95%">
+   <v-card class="mx-auto" color="black" width="100%">
   <div class="ma-4 mb-4 bg-movie mb-10 pa-6">
     <h2 class="text-white ">By Rating</h2>
     <div class="horizontal-scroll d-flex ">
