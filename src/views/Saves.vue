@@ -12,7 +12,7 @@
 </v-row>
 <v-row no-gutters v-else class="text-center">
   <div class="mt-10 ma-auto" >
-  <h3>You haven't added any movies to your save list yet. Start adding your favorite movies now!</h3>
+  <h4>You haven't added any movies to your save list yet.<br/> Start adding your favorite movies now!</h4>
 </div>
 </v-row>
   </v-container>
