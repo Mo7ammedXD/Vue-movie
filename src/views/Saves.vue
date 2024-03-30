@@ -11,8 +11,8 @@
       </div>
 </v-row>
 <v-row no-gutters v-else class="text-center">
-  <div class="mt-10" >
-  <p>You haven't added any movies to your save list yet. Start adding your favorite movies now!</p>
+  <div class="mt-10 ma-auto" >
+  <h3>You haven't added any movies to your save list yet. Start adding your favorite movies now!</h3>
 </div>
 </v-row>
   </v-container>
