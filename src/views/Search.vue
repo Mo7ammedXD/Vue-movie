@@ -77,27 +77,3 @@ const { data:search , isFetching: isFetchingPeers,refetch } = useQuery({
 });
 
 </script>
-
-<style>
-.itmes {
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-
-  padding: 10px;
-  height: auto;
-}
-.item {
-
-  margin: auto;
-  min-width: 150px;
-  max-width: 120px;
-
-}
-.title {
-  font-weight: bold;
-  color: white;
-  padding: 10px;
-  height: 70px;
-}
-</style>
