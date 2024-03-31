@@ -26,8 +26,9 @@
               </div>
               <v-row class="ma-auto" >
                 <v-chip
-
-                variant="flat"
+                size="small"
+                class="ma-1 pa-2"
+                variant="elevated"
                   v-for="(genre, index) in moiveNow?.genres"
                   :key="index"
                   :color="getOrderStatusColor(genre)"
