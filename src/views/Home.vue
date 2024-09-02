@@ -46,23 +46,23 @@ const { data: byAddDate, isFetching: isFetchingAddDate } = useQuery({
 });
 
 
-const { data: byPeers, isFetching: isFetchingPeers } = useQuery({
-  queryKey: ["moviesbyPeers"],
-  queryFn: async () => {
-    const response: AxiosResponse<Movie[] | any> = await list_movies.get("/", {
-      params: {
-        sort_by: "like_count",
-        limit: 50,
-      },
-    });
+// const { data: byPeers, isFetching: isFetchingPeers } = useQuery({
+//   queryKey: ["moviesbyPeers"],
+//   queryFn: async () => {
+//     const response: AxiosResponse<Movie[] | any> = await list_movies.get("/", {
+//       params: {
+//         sort_by: "like_count",
+//         limit: 50,
+//       },
+//     });
 
-    return response.data.data?.movies as Movie[];
-  },
-});
+//     return response.data.data?.movies as Movie[];
+//   },
+// });
 </script>
 
 <template>
-   <v-card class="mx-auto" color="black" width="100%">
+   <v-card class="mx-auto" color="black" width="100%"  >
   <div class="ma-4 mb-4 bg-movie mb-10 pa-6">
     <h2 class="text-white ">By Rating</h2>
     <div class="horizontal-scroll d-flex ">

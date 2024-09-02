@@ -51,7 +51,7 @@ const onClick = () => {
 
 
 const { data:search , isFetching: isFetchingPeers,refetch } = useQuery({
-  queryKey: ["moviesSearch"],
+  queryKey: ["moviesSearch" ,userSearch],
   queryFn: async ( ) => {
     const response: AxiosResponse<Movie[] | any> = await list_movies.get("/", {
       params: {
@@ -60,12 +60,14 @@ const { data:search , isFetching: isFetchingPeers,refetch } = useQuery({
         page:page.value,
         query_term:userSearch.value
       },
+      
     });
     limit.value=50
 
 
     return response.data.data?.movies as Movie[];
   },
+  staleTime: 0,
 });
 
 </script>
