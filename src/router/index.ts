@@ -1,6 +1,6 @@
 // Composables
 import { createRouter, createWebHistory } from "vue-router";
-
+import MovieDetail from "@/views/Movie.vue";
 const routes = [
   {
     path: "/",
@@ -17,9 +17,10 @@ const routes = [
         component: () => import("@/views/Search.vue"),
       },
       {
-        path: "/movie/:id(\\d+)",
-        name: "Movie",
-        component: () => import("@/views/Movie.vue"),
+        path: '/movie/:id',
+        name: 'MovieDetail',
+        component: MovieDetail,
+        props: true, 
       },
       {
         path: "/saves",

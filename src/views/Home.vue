@@ -46,19 +46,6 @@ const { data: byAddDate, isFetching: isFetchingAddDate } = useQuery({
 });
 
 
-// const { data: byPeers, isFetching: isFetchingPeers } = useQuery({
-//   queryKey: ["moviesbyPeers"],
-//   queryFn: async () => {
-//     const response: AxiosResponse<Movie[] | any> = await list_movies.get("/", {
-//       params: {
-//         sort_by: "like_count",
-//         limit: 50,
-//       },
-//     });
-
-//     return response.data.data?.movies as Movie[];
-//   },
-// });
 </script>
 
 <template>

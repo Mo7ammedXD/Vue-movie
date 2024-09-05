@@ -1,11 +1,11 @@
 <template>
   <v-app>
     <default-view />
-    <AppFooter />
+    <NavBar />
   </v-app>
 </template>
 
 <script lang="ts" setup>
-import AppFooter from "@/components/footer/AppFooter.vue";
 import DefaultView from "./View.vue";
+import NavBar from "@/components/footer/NavBar.vue";
 </script>
