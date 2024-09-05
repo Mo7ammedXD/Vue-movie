@@ -13,9 +13,6 @@
             <div class="movie-title ">
               {{ moiveNow?.title }}
             </div>
-            <div class="movie-year">
-              ({{ moiveNow?.year }})
-            </div>
           </v-card-title>
 
           <v-tabs v-model="tab" bg-color="primary" color="black" >
@@ -49,6 +46,8 @@
                     <p><strong>MPA Rating:</strong> {{ moiveNow?.mpa_rating }}</p>
                   </v-col>
                   <v-col>
+                    <p><strong>Year:</strong> {{ moiveNow?.year }}</p>
+
                     <p><strong>Uploaded on:</strong> {{ moiveNow?.date_uploaded }}</p>
                     <p><strong>State:</strong> {{ moiveNow?.state }}</p>
                   </v-col>
@@ -172,6 +171,10 @@ watch(
   (newId) => {
     refetchMovieDetails(); 
     refetchRelatedMovies(); 
+    window.scroll({
+  top: 0,
+  behavior: 'smooth', 
+});
   }
 );
 
@@ -207,7 +210,6 @@ const getTorrentIcon = (quality: string) => {
 .movie-year {
   font-size: 16px; 
   margin-top: 8px;
-  color: #777;
 }
 
 .rating-text {
@@ -234,7 +236,7 @@ const getTorrentIcon = (quality: string) => {
 }
 
 .movie-title {
-  font-size: 16px;
+  font-size: 24px;
   text-align: center;
   margin-top: 10px;
 }
