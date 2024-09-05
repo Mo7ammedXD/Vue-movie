@@ -2,46 +2,22 @@
 import type { Movie } from "@/types/Movie";
 import { useQuery } from "@tanstack/vue-query";
 import { list_movies } from "@/helper/axios";
-import { AxiosResponse } from "axios";
-import MovieCard from '@/components/shared/MovieCard.vue'
+import MovieCard from '@/components/shared/MovieCard.vue';
 
-const { data: byRating, isFetching: isFetchingRating } = useQuery({
-  queryKey: ["moviesByRating"],
+const { data, isFetching, error } = useQuery({
+  queryKey: ["moviesData"],
   queryFn: async () => {
-    const response: AxiosResponse<Movie[] | any> = await list_movies.get("/", {
-      params: {
-        sort_by: "rating",
-        limit: 20,
-      },
-    });
-    return response.data.data?.movies;
-  },
-});
+    const [byRatingResponse, byDownloadResponse, byAddDateResponse] = await Promise.all([
+      list_movies.get("/", { params: { sort_by: "rating", limit: 20 } }),
+      list_movies.get("/", { params: { sort_by: "download_count", limit: 20 } }),
+      list_movies.get("/", { params: { sort_by: "date_added", limit: 5 } })
+    ]);
 
-const { data: byDownload, isFetching: isFetchingDownload } = useQuery({
-  queryKey: ["moviesByDownload"],
-  queryFn: async () => {
-    const response: AxiosResponse<Movie[] | any> = await list_movies.get("/", {
-      params: {
-        sort_by: "download_count",
-        limit: 20,
-      },
-    });
-    return response.data.data?.movies;
-  },
-});
-
-const { data: byAddDate, isFetching: isFetchingAddDate } = useQuery({
-  queryKey: ["moviesByAddDate"],
-  queryFn: async () => {
-    const response: AxiosResponse<Movie[] | any> = await list_movies.get("/", {
-      params: {
-        sort_by: "date_added",
-        limit: 5,
-      },
-    });
-
-    return response.data.data?.movies as Movie[];
+    return {
+      byRating: byRatingResponse.data.data?.movies as Movie[],
+      byDownload: byDownloadResponse.data.data?.movies as Movie[],
+      byAddDate: byAddDateResponse.data.data?.movies as Movie[]
+    };
   },
 });
 
@@ -53,7 +29,7 @@ const { data: byAddDate, isFetching: isFetchingAddDate } = useQuery({
   <div class="ma-4 mb-4 bg-movie mb-10 pa-6">
     <h2 class="text-white ">By Rating</h2>
     <div class="horizontal-scroll d-flex ">
-      <div v-for="movie in byRating" :key="movie.id" class="item me-4">
+      <div v-for="movie in data?.byRating" :key="movie.id" class="item me-4 mb-2">
       <MovieCard :movie="movie"></MovieCard>
       </div>
     </div>
@@ -62,7 +38,7 @@ const { data: byAddDate, isFetching: isFetchingAddDate } = useQuery({
   <div class="ma-4 mb-4 bg-movie mb-10 pa-6">
     <h2 class="text-white">By Donwload</h2>
     <div class="horizontal-scroll d-flex">
-      <div v-for="movie in byDownload" :key="movie.id" class="item me-4">
+      <div v-for="movie in data?.byDownload" :key="movie.id" class="item me-4 mb-2">
         <MovieCard :movie="movie"></MovieCard>
 
 
@@ -81,7 +57,7 @@ const { data: byAddDate, isFetching: isFetchingAddDate } = useQuery({
     hide-delimiter-background
   >
     <v-carousel-item
-      v-for="slide in byAddDate"
+      v-for="slide in data?.byAddDate"
       :key="slide.id"
       :src="slide.large_cover_image"
     >
@@ -92,11 +68,11 @@ const { data: byAddDate, isFetching: isFetchingAddDate } = useQuery({
 
 
 
-  <v-container class="bg-movie pa-6">
+  <v-container class="bg-movie pa-6 mb-4">
     <h2 class="text-white">The Most Popular</h2>
 
     <v-row no-gutters class="mb-10 ">
-      <div v-for="movie in byDownload" :key="movie.id" class="item ">
+      <div v-for="movie in data?.byDownload" :key="movie.id" class="item mb-2">
         <MovieCard :movie="movie"></MovieCard>
       </div>
     </v-row>

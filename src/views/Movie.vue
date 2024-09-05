@@ -1,7 +1,6 @@
 <template>
   <v-container class="pa-4" fluid>
     <v-row justify="center">
-      <!-- Movie Image Section -->
       <v-col cols="12" md="6" lg="4" class="text-center">
         <v-card :loading="isFetchingRating" class="filtered-background ma-auto">
           <v-img :src="moiveNow?.large_cover_image" class="w-100">
@@ -9,11 +8,9 @@
         </v-card>
       </v-col>
 
-      <!-- Movie Info Section -->
       <v-col cols="12" md="8" lg="6">
-        <v-card class="w-100 ma-auto">
-          <!-- Movie Title -->
-          <v-card-title class="title">{{ moiveNow?.title }}</v-card-title>
+        <v-card class="w-100 ma-auto ">
+          <v-card-title class="title h-100">{{ moiveNow?.title }} <br> ({{ moiveNow?.year }})</v-card-title>
 
           <v-tabs v-model="tab" bg-color="primary" color="white" grow>
             <v-tab value="one">Info</v-tab>
@@ -23,9 +20,8 @@
 
           <v-card-text class="bg-yellow-400 px-4 py-2">
             <v-window v-model="tab">
-              <!-- Movie Info Tab -->
               <v-window-item value="one">
-                <div class="d-flex align-center">
+                <div class="d-flex align-center mb-2">
                   <v-rating
                     :length="1"
                     :size="30"
@@ -34,8 +30,24 @@
                     model-value="1"
                     readonly
                   ></v-rating>
-                  <p class="rating-text ml-2">{{ moiveNow?.rating }}</p>
+                  <p class="rating-text ml-2">{{ moiveNow?.rating }}/10</p>
+                  <a :href="`https://www.imdb.com/title/${moiveNow?.imdb_code}/`" target="_blank" class="ml-3 text-white">
+                    View on IMDb
+                  </a>
                 </div>
+
+                <v-row>
+                  <v-col>
+                    <p><strong>Runtime:</strong> {{ moiveNow?.runtime }} minutes</p>
+                    <p><strong>Language:</strong> {{ moiveNow?.language }}</p>
+                    <p><strong>MPA Rating:</strong> {{ moiveNow?.mpa_rating }}</p>
+                  </v-col>
+                  <v-col>
+                    <p><strong>Uploaded on:</strong> {{ moiveNow?.date_uploaded }}</p>
+                    <p><strong>State:</strong> {{ moiveNow?.state }}</p>
+                  </v-col>
+                </v-row>
+
                 <v-row class="ma-auto">
                   <v-chip
                     size="small"
@@ -50,7 +62,6 @@
                 </v-row>
               </v-window-item>
 
-              <!-- Trailers Tab -->
               <v-window-item value="two">
                 <iframe
                   :src="`https://www.youtube.com/embed/${moiveNow?.yt_trailer_code}`"
@@ -61,14 +72,13 @@
                 ></iframe>
               </v-window-item>
 
-              <!-- About Tab -->
               <v-window-item value="three">
                 <p class="story">{{ moiveNow?.description_full }}</p>
               </v-window-item>
             </v-window>
           </v-card-text>
 
-          <!-- Download Section with Icons -->
+          <!-- Download Section with Torrent Info -->
           <v-card color="black" class="py-8">
             <v-card-title class="text-white">Download Options</v-card-title>
             <v-card-subtitle class="text-grey">Torrent Links</v-card-subtitle>
@@ -86,23 +96,22 @@
                   elevation="2"
                 >
                   <v-icon left>{{ getTorrentIcon(torrent.quality) }}</v-icon>
-                  <h4>{{ torrent.type }} - {{ torrent.quality }}</h4>
+                  <h4>{{ torrent.type }} - {{ torrent.quality }} - {{ torrent.size }}</h4>
                 </v-btn>
               </div>
             </v-row>
           </v-card>
 
-          <!-- Related Movies Section -->
           <v-card color="black" class="py-8" :loading="isFetchingRelated">
             <div class="ma-4 mb-4 bg-movie mb-10 pa-6">
               <v-card-title class="text-white">Related Movies</v-card-title>
 
-    <div class="horizontal-scroll d-flex ">
-      <div v-for="movie in relatedMovies" :key="movie.id" class="item me-4">
-      <MovieCard :movie="movie"></MovieCard>
-      </div>
-    </div>
-  </div>
+              <div class="horizontal-scroll d-flex">
+                <div v-for="movie in relatedMovies" :key="movie.id" class="item me-4">
+                  <MovieCard :movie="movie"></MovieCard>
+                </div>
+              </div>
+            </div>
           </v-card>
         </v-card>
       </v-col>
@@ -110,20 +119,20 @@
   </v-container>
 </template>
 
+
 <script lang="ts" setup>
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { getOrderStatusColor } from "@/helper/color";
 import { movie_details, suggestions } from "../helper/axios";
 import { useQuery } from "@tanstack/vue-query";
-import { AxiosResponse } from "axios";
+import type  { AxiosResponse } from "axios";
 import type { Movie } from "@/types/Movie";
 import MovieCard from "@/components/shared/MovieCard.vue";
 
 const vueRouter = useRoute();
 const tab = ref();
 
-// Function to fetch movie details
 const fetchMovieDetails = async (movieId: number) => {
   const response: AxiosResponse<Movie | any> = await movie_details.get("/", {
     params: {
@@ -170,7 +179,6 @@ const getTorrentIcon = (quality: string) => {
 </script>
 
 <style scoped>
-/* Movie Title */
 .title {
   font-weight: 800;
   font-size: 24px;
@@ -179,20 +187,18 @@ const getTorrentIcon = (quality: string) => {
   text-align: center;
 }
 
-/* Rating text */
 .rating-text {
   font-size: 20px;
   color: #fff;
   font-weight: bold;
 }
 
-/* Genre chip styling */
 .genre-chip {
   background-color: #f0ad4e;
   color: #fff;
 }
 
-/* Download Button Styling */
+
 .download-btn {
   background-color: #007bff;
   color: white;
@@ -201,12 +207,10 @@ const getTorrentIcon = (quality: string) => {
   transition: background-color 0.3s ease;
 }
 
-/* Hover effect for download buttons */
 .download-btn:hover {
   background-color: #0056b3;
 }
 
-/* Related Movie Title */
 .movie-title {
   font-size: 16px;
   color: #fff;

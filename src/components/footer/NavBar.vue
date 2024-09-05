@@ -18,7 +18,7 @@
 
   <!-- Toolbar Navigation for Desktop Screens -->
   <v-app-bar v-else class="bg-black">
-    <v-toolbar-title>My App</v-toolbar-title>
+    <v-toolbar-title ><span class="text-yellow">XD</span>MOVIE</v-toolbar-title>
     <v-spacer></v-spacer>
 
     <v-btn :class="{ 'bg-yellow': isHomeActive }" to="/" >
