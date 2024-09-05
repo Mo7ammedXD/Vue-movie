@@ -1,5 +1,4 @@
 <template>
-  <!-- Footer Navigation for Mobile Screens -->
   <v-footer class="bg-black display-fixed" v-if="isMobile">
     <v-bottom-navigation class="bg-black" grow>
       <v-btn :class="{ 'bg-yellow': isHomeActive }" to="/">
@@ -16,7 +15,6 @@
     </v-bottom-navigation>
   </v-footer>
 
-  <!-- Toolbar Navigation for Desktop Screens -->
   <v-app-bar v-else class="bg-black">
     <v-toolbar-title ><span class="text-yellow">XD</span>MOVIE</v-toolbar-title>
     <v-spacer></v-spacer>
@@ -40,16 +38,13 @@ import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useDisplay } from 'vuetify';
 
-// Get the current route
 const route = useRoute();
 const display = useDisplay();
 
-// Check which route is active
 const isHomeActive = computed(() => route.path === '/');
 const isSearchActive = computed(() => route.path === '/search');
 const isSavesActive = computed(() => route.path === '/saves');
 
-// Determine if the display is mobile or desktop
 const isMobile = computed(() => display.width.value < 600);
 </script>
 

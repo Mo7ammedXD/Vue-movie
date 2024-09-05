@@ -10,7 +10,7 @@
       <v-col cols="12" md="8" lg="6">
         <v-card class="w-100 ma-auto " color="primary" >
           <v-card-title class="title ">
-            <div class="movie-title ">
+            <div class="movie-title h-100 ">
               {{ moiveNow?.title }}
             </div>
           </v-card-title>
@@ -77,7 +77,7 @@
                 ></iframe>
               </v-window-item>
 
-              <v-window-item value="three">
+              <v-window-item value="three" class=" overflow-auto max-height" >
                 <p class="story">{{ moiveNow?.description_full }}</p>
               </v-window-item>
             </v-window>
@@ -239,5 +239,8 @@ const getTorrentIcon = (quality: string) => {
   font-size: 24px;
   text-align: center;
   margin-top: 10px;
+}
+.max-height {
+  max-height: 350px;
 }
 </style>

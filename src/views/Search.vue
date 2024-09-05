@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto mb-4" color="black" width="100%">
+  <v-card class="mx-auto mb-4 pa-4" color="black" width="100%">
     <v-card-text>
       <v-text-field
         color="primary"
@@ -29,9 +29,7 @@
         <div v-for="movie in search" :key="movie.id" class="item mb-3">
           <MovieCard :movie="movie"></MovieCard>
         </div>
-      </v-row>
-
-      <v-row justify="center" class="mt-4">
+        <v-row justify="center" class="mt-4 ">
         <v-pagination
           v-if="totalPages > 1 && search?.length"
           v-model="page"
@@ -40,6 +38,9 @@
           @input="onPageChange"
         ></v-pagination>
       </v-row>
+      </v-row>
+
+      
     </v-container>
   </v-card>
 </template>
