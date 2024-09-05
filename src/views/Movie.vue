@@ -8,7 +8,7 @@
       </v-col>
 
       <v-col cols="12" md="8" lg="6">
-        <v-card class="w-100 ma-auto " color="primary" variant="flat">
+        <v-card class="w-100 ma-auto " color="primary" >
           <v-card-title class="title ">
             <div class="movie-title ">
               {{ moiveNow?.title }}
@@ -18,7 +18,7 @@
             </div>
           </v-card-title>
 
-          <v-tabs v-model="tab" bg-color="primary" color="white" >
+          <v-tabs v-model="tab" bg-color="primary" color="black" >
             <v-tab value="one">Info</v-tab>
             <v-tab v-if="moiveNow?.yt_trailer_code" value="two">Trailers</v-tab>
             <v-tab value="three" v-if="moiveNow?.description_full">About</v-tab>
@@ -36,7 +36,7 @@
                     model-value="1"
                     readonly
                   ></v-rating>
-                  <p class="rating-text ml-2">{{ moiveNow?.rating }}/10</p>
+                  <p class="rating-text ml-2 text-black">{{ moiveNow?.rating }}/10</p>
                   <a :href="`https://www.imdb.com/title/${moiveNow?.imdb_code}/`" target="_blank" class="ml-3 text-white">
                     View on IMDb
                   </a>
