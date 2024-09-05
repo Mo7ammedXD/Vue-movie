@@ -3,16 +3,22 @@
     <v-row justify="center">
       <v-col cols="12" md="6" lg="4" class="text-center">
         <v-card :loading="isFetchingRating" class="filtered-background ma-auto">
-          <v-img :src="moiveNow?.large_cover_image" class="w-100">
-          </v-img>
+          <v-img :src="moiveNow?.large_cover_image" class="w-100"></v-img>
         </v-card>
       </v-col>
 
       <v-col cols="12" md="8" lg="6">
-        <v-card class="w-100 ma-auto ">
-          <v-card-title class="title h-100">{{ moiveNow?.title }} <br> ({{ moiveNow?.year }})</v-card-title>
+        <v-card class="w-100 ma-auto " color="primary" variant="flat">
+          <v-card-title class="title ">
+            <div class="movie-title ">
+              {{ moiveNow?.title }}
+            </div>
+            <div class="movie-year">
+              ({{ moiveNow?.year }})
+            </div>
+          </v-card-title>
 
-          <v-tabs v-model="tab" bg-color="primary" color="white" grow>
+          <v-tabs v-model="tab" bg-color="primary" color="white" >
             <v-tab value="one">Info</v-tab>
             <v-tab v-if="moiveNow?.yt_trailer_code" value="two">Trailers</v-tab>
             <v-tab value="three" v-if="moiveNow?.description_full">About</v-tab>
@@ -78,7 +84,6 @@
             </v-window>
           </v-card-text>
 
-          <!-- Download Section with Torrent Info -->
           <v-card color="black" class="py-8">
             <v-card-title class="text-white">Download Options</v-card-title>
             <v-card-subtitle class="text-grey">Torrent Links</v-card-subtitle>
@@ -118,7 +123,6 @@
     </v-row>
   </v-container>
 </template>
-
 
 <script lang="ts" setup>
 import { ref, watch } from "vue";
@@ -178,13 +182,32 @@ const getTorrentIcon = (quality: string) => {
 };
 </script>
 
+
 <style scoped>
 .title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   font-weight: 800;
-  font-size: 24px;
+  font-size: 2.5vw;
   color: #333;
-  padding: 16px 0;
   text-align: center;
+  margin-bottom: 16px;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.movie-title {
+  font-size: inherit;
+  white-space: normal;
+  line-height: 1.2;
+}
+
+.movie-year {
+  font-size: 16px; 
+  margin-top: 8px;
+  color: #777;
 }
 
 .rating-text {
@@ -197,7 +220,6 @@ const getTorrentIcon = (quality: string) => {
   background-color: #f0ad4e;
   color: #fff;
 }
-
 
 .download-btn {
   background-color: #007bff;
@@ -213,9 +235,7 @@ const getTorrentIcon = (quality: string) => {
 
 .movie-title {
   font-size: 16px;
-  color: #fff;
   text-align: center;
   margin-top: 10px;
 }
-
 </style>
