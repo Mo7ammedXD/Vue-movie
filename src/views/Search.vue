@@ -34,7 +34,7 @@
           v-if="totalPages > 1 && search?.length"
           v-model="page"
           :length="totalPages"
-          total-visible="7"
+          total-visible="6"
           @input="onPageChange"
         ></v-pagination>
       </v-row>
