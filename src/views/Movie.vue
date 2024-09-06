@@ -158,13 +158,16 @@ const { data: moiveNow, refetch: refetchMovieDetails, isFetching: isFetchingRati
   queryKey: ["Movie", vueRouter.params.id],
   queryFn: () => fetchMovieDetails(Number.parseInt(vueRouter.params.id as string)),
   staleTime: Infinity,
+  enabled: !!vueRouter.params.id, 
 });
 
 const { data: relatedMovies, refetch: refetchRelatedMovies, isFetching: isFetchingRelated } = useQuery({
   queryKey: ["relatedMovies", vueRouter.params.id],
   queryFn: () => fetchRelatedMovies(Number.parseInt(vueRouter.params.id as string)),
   staleTime: Infinity,
+  enabled: !!vueRouter.params.id,
 });
+
 
 watch(
   () => vueRouter.params.id,
