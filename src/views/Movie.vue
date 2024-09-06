@@ -134,11 +134,9 @@ import type { AxiosResponse } from "axios";
 import type { Movie } from "@/types/Movie";
 import MovieCard from "@/components/shared/MovieCard.vue";
 
-// Use the router to access the route parameters
 const vueRouter = useRoute();
-const tab = ref<string | null>(null); // Ensure correct typing for `tab`
+const tab = ref<string | null>(null); 
 
-// Fetch movie details
 const fetchMovieDetails = async (movieId: number) => {
   try {
     const response: AxiosResponse<Movie | any> = await movie_details.get("/", {
@@ -149,11 +147,10 @@ const fetchMovieDetails = async (movieId: number) => {
     return response.data.data?.movie;
   } catch (error) {
     console.error("Error fetching movie details:", error);
-    return null; // Return null in case of error
+    return null; 
   }
 };
 
-// Fetch related movies
 const fetchRelatedMovies = async (movieId: number) => {
   try {
     const response: AxiosResponse<Movie[] | any> = await suggestions.get("/", {
@@ -164,16 +161,15 @@ const fetchRelatedMovies = async (movieId: number) => {
     return response.data.data?.movies as Movie[];
   } catch (error) {
     console.error("Error fetching related movies:", error);
-    return []; // Return empty array in case of error
+    return []; 
   }
 };
 
-// Query for movie details
 const { data: movieNow, refetch: refetchMovieDetails, isFetching: isFetchingRating } = useQuery({
   queryKey: ["Movie", vueRouter.params.id],
   queryFn: () => fetchMovieDetails(Number.parseInt(vueRouter.params.id as string)),
   staleTime: Infinity,
-  enabled: !!vueRouter.params.id, // Ensure query only runs if there's an ID
+  enabled: !!vueRouter.params.id, 
 });
 
 // Query for related movies
@@ -181,10 +177,9 @@ const { data: relatedMovies, refetch: refetchRelatedMovies, isFetching: isFetchi
   queryKey: ["relatedMovies", vueRouter.params.id],
   queryFn: () => fetchRelatedMovies(Number.parseInt(vueRouter.params.id as string)),
   staleTime: Infinity,
-  enabled: !!vueRouter.params.id, // Ensure query only runs if there's an ID
+  enabled: !!vueRouter.params.id, 
 });
 
-// Watch the route ID for changes and refetch data
 watch(
   () => vueRouter.params.id,
   (newId) => {
@@ -195,7 +190,6 @@ watch(
   }
 );
 
-// Get appropriate torrent icon based on quality
 const getTorrentIcon = (quality: string) => {
   if (quality.includes("1080") || quality.includes("2160")) return "mdi-video-high-definition";
   return "mdi-download";
