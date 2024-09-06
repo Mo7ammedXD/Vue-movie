@@ -11,6 +11,9 @@ const props = defineProps({
   movie: {
     type: Object as () => Movie,
     required: true,
+  },isFetching: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -44,7 +47,10 @@ watch(movies, (newMovies) => {
 
 
 <template>
+    <v-skeleton-loader v-if="isFetching" type="card"></v-skeleton-loader>
+
   <v-card
+    v-else
     @click="navigateToMovie" 
     class="bg-yellow ma-1"
     :image="movie.medium_cover_image"
@@ -62,7 +68,10 @@ watch(movies, (newMovies) => {
     </v-card-actions>
   </v-card>
 
-  <div class="movie-info mt-2">
+
+
+  <div class="movie-info mt-2" v-if="!isFetching">
+    
     <v-card-title class="text-wrap title">
       <h6 class="text-white">{{ movie.title }}</h6>
     </v-card-title>

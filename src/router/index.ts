@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import MovieDetail from "@/views/Movie.vue";
 
+
+
 const routes = [
   {
     path: "/",
@@ -19,7 +21,7 @@ const routes = [
       {
         path: '/movie/:id',
         name: 'MovieDetail',
-        component: MovieDetail,
+        component:()=> MovieDetail,
         props: true, 
       },
       {
@@ -35,5 +37,7 @@ const router = createRouter({
   history: createWebHistory(),  
   routes,
 });
+
+
 
 export default router;

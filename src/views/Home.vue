@@ -30,7 +30,7 @@ const { data, isFetching, error } = useQuery({
     <h2 class="text-white ">By Rating</h2>
     <div class="horizontal-scroll d-flex ">
       <div v-for="movie in data?.byRating" :key="movie.id" class="item me-4 mb-2">
-      <MovieCard :movie="movie"></MovieCard>
+      <MovieCard :movie="movie"  :is-fetching="isFetching"></MovieCard>
       </div>
     </div>
   </div>
@@ -39,7 +39,7 @@ const { data, isFetching, error } = useQuery({
     <h2 class="text-white">By Donwload</h2>
     <div class="horizontal-scroll d-flex">
       <div v-for="movie in data?.byDownload" :key="movie.id" class="item me-4 mb-2">
-        <MovieCard :movie="movie"></MovieCard>
+        <MovieCard :movie="movie" :is-fetching="isFetching"></MovieCard>
 
 
       </div>
@@ -73,7 +73,7 @@ const { data, isFetching, error } = useQuery({
 
     <v-row no-gutters class="mb-10 ">
       <div v-for="movie in data?.byDownload" :key="movie.id" class="item mb-2">
-        <MovieCard :movie="movie"></MovieCard>
+        <MovieCard :movie="movie" :is-fetching="isFetching"></MovieCard>
       </div>
     </v-row>
   </v-container>

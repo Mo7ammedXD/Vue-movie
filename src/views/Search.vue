@@ -27,7 +27,7 @@
 
       <v-row no-gutters>
         <div v-for="movie in search" :key="movie.id" class="item mb-3">
-          <MovieCard :movie="movie"></MovieCard>
+          <MovieCard :movie="movie" ></MovieCard>
         </div>
         <v-row justify="center" class="mt-4 ">
         <v-pagination
@@ -82,8 +82,10 @@ const executeSearch = debounce(() => {
 }, 300);           
 
 watch(userSearch, () => {
+  if (!userSearch.value.trim()) return; 
   executeSearch();
 });
+
 
 const totalPages = computed(() => {
   return Math.ceil(totalResults.value / limit.value);

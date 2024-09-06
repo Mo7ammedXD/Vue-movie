@@ -171,10 +171,7 @@ watch(
   (newId) => {
     refetchMovieDetails(); 
     refetchRelatedMovies(); 
-    window.scroll({
-  top: 0,
-  behavior: 'smooth', 
-});
+
   }
 );
 
