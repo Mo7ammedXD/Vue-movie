@@ -3,7 +3,7 @@
     <v-row justify="center">
       <v-col cols="12" md="6" lg="4" class="text-center">
         <v-card :loading="isFetchingRating" class="filtered-background ma-auto">
-          <v-img :src="moiveNow?.large_cover_image" class="w-100"></v-img>
+          <v-img :src="movieNow?.large_cover_image" class="w-100"></v-img>
         </v-card>
       </v-col>
 
@@ -11,14 +11,14 @@
         <v-card class="w-100 ma-auto " color="primary" >
           <v-card-title class="title ">
             <div class="movie-title h-100 ">
-              {{ moiveNow?.title }}
+              {{ movieNow?.title }}
             </div>
           </v-card-title>
 
           <v-tabs v-model="tab" bg-color="primary" color="black" >
             <v-tab value="one">Info</v-tab>
-            <v-tab v-if="moiveNow?.yt_trailer_code" value="two">Trailers</v-tab>
-            <v-tab value="three" v-if="moiveNow?.description_full">About</v-tab>
+            <v-tab v-if="movieNow?.yt_trailer_code" value="two">Trailers</v-tab>
+            <v-tab value="three" v-if="movieNow?.description_full">About</v-tab>
           </v-tabs>
 
           <v-card-text class="bg-yellow-400 px-4 py-2">
@@ -33,23 +33,23 @@
                     model-value="1"
                     readonly
                   ></v-rating>
-                  <p class="rating-text ml-2 text-black">{{ moiveNow?.rating }}/10</p>
-                  <a :href="`https://www.imdb.com/title/${moiveNow?.imdb_code}/`" target="_blank" class="ml-3 text-white">
+                  <p class="rating-text ml-2 text-black">{{ movieNow?.rating }}/10</p>
+                  <a :href="`https://www.imdb.com/title/${movieNow?.imdb_code}/`" target="_blank" class="ml-3 text-white">
                     View on IMDb
                   </a>
                 </div>
 
                 <v-row>
                   <v-col>
-                    <p><strong>Runtime:</strong> {{ moiveNow?.runtime }} minutes</p>
-                    <p><strong>Language:</strong> {{ moiveNow?.language }}</p>
-                    <p><strong>MPA Rating:</strong> {{ moiveNow?.mpa_rating }}</p>
+                    <p><strong>Runtime:</strong> {{ movieNow?.runtime }} minutes</p>
+                    <p><strong>Language:</strong> {{ movieNow?.language }}</p>
+                    <p><strong>MPA Rating:</strong> {{ movieNow?.mpa_rating }}</p>
                   </v-col>
                   <v-col>
-                    <p><strong>Year:</strong> {{ moiveNow?.year }}</p>
+                    <p><strong>Year:</strong> {{ movieNow?.year }}</p>
 
-                    <p><strong>Uploaded on:</strong> {{ moiveNow?.date_uploaded }}</p>
-                    <p><strong>State:</strong> {{ moiveNow?.state }}</p>
+                    <p><strong>Uploaded on:</strong> {{ movieNow?.date_uploaded }}</p>
+                    <p><strong>State:</strong> {{ movieNow?.state }}</p>
                   </v-col>
                 </v-row>
 
@@ -58,7 +58,7 @@
                     size="small"
                     class="ma-1 pa-2 genre-chip"
                     variant="elevated"
-                    v-for="(genre, index) in moiveNow?.genres"
+                    v-for="(genre, index) in movieNow?.genres"
                     :key="index"
                     :color="getOrderStatusColor(genre)"
                   >
@@ -69,7 +69,7 @@
 
               <v-window-item value="two">
                 <iframe
-                  :src="`https://www.youtube.com/embed/${moiveNow?.yt_trailer_code}`"
+                  :src="`https://www.youtube.com/embed/${movieNow?.yt_trailer_code}`"
                   width="100%"
                   height="315"
                   frameborder="0"
@@ -78,7 +78,7 @@
               </v-window-item>
 
               <v-window-item value="three" class=" overflow-auto max-height" >
-                <p class="story">{{ moiveNow?.description_full }}</p>
+                <p class="story">{{ movieNow?.description_full }}</p>
               </v-window-item>
             </v-window>
           </v-card-text>
@@ -89,7 +89,7 @@
             <v-row class="itmes">
               <div
                 class="ma-2 mb-5"
-                v-for="(torrent, index) in moiveNow?.torrents"
+                v-for="(torrent, index) in movieNow?.torrents"
                 :key="index"
               >
                 <v-btn
@@ -123,67 +123,85 @@
   </v-container>
 </template>
 
+
 <script lang="ts" setup>
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { getOrderStatusColor } from "@/helper/color";
 import { movie_details, suggestions } from "../helper/axios";
 import { useQuery } from "@tanstack/vue-query";
-import type  { AxiosResponse } from "axios";
+import type { AxiosResponse } from "axios";
 import type { Movie } from "@/types/Movie";
 import MovieCard from "@/components/shared/MovieCard.vue";
 
+// Use the router to access the route parameters
 const vueRouter = useRoute();
-const tab = ref();
+const tab = ref<string | null>(null); // Ensure correct typing for `tab`
 
+// Fetch movie details
 const fetchMovieDetails = async (movieId: number) => {
-  const response: AxiosResponse<Movie | any> = await movie_details.get("/", {
-    params: {
-      movie_id: movieId,
-    },
-  });
-  return response.data.data?.movie;
+  try {
+    const response: AxiosResponse<Movie | any> = await movie_details.get("/", {
+      params: {
+        movie_id: movieId,
+      },
+    });
+    return response.data.data?.movie;
+  } catch (error) {
+    console.error("Error fetching movie details:", error);
+    return null; // Return null in case of error
+  }
 };
 
+// Fetch related movies
 const fetchRelatedMovies = async (movieId: number) => {
-  const response: AxiosResponse<Movie[] | any> = await suggestions.get("/", {
-    params: {
-      movie_id: movieId,
-    },
-  });
-  return response.data.data?.movies as Movie[];
+  try {
+    const response: AxiosResponse<Movie[] | any> = await suggestions.get("/", {
+      params: {
+        movie_id: movieId,
+      },
+    });
+    return response.data.data?.movies as Movie[];
+  } catch (error) {
+    console.error("Error fetching related movies:", error);
+    return []; // Return empty array in case of error
+  }
 };
 
-const { data: moiveNow, refetch: refetchMovieDetails, isFetching: isFetchingRating } = useQuery({
+// Query for movie details
+const { data: movieNow, refetch: refetchMovieDetails, isFetching: isFetchingRating } = useQuery({
   queryKey: ["Movie", vueRouter.params.id],
   queryFn: () => fetchMovieDetails(Number.parseInt(vueRouter.params.id as string)),
   staleTime: Infinity,
-  enabled: !!vueRouter.params.id, 
+  enabled: !!vueRouter.params.id, // Ensure query only runs if there's an ID
 });
 
+// Query for related movies
 const { data: relatedMovies, refetch: refetchRelatedMovies, isFetching: isFetchingRelated } = useQuery({
   queryKey: ["relatedMovies", vueRouter.params.id],
   queryFn: () => fetchRelatedMovies(Number.parseInt(vueRouter.params.id as string)),
   staleTime: Infinity,
-  enabled: !!vueRouter.params.id,
+  enabled: !!vueRouter.params.id, // Ensure query only runs if there's an ID
 });
 
-
+// Watch the route ID for changes and refetch data
 watch(
   () => vueRouter.params.id,
   (newId) => {
-    refetchMovieDetails(); 
-    refetchRelatedMovies(); 
-
+    if (newId) {
+      refetchMovieDetails(); 
+      refetchRelatedMovies();
+    }
   }
 );
 
+// Get appropriate torrent icon based on quality
 const getTorrentIcon = (quality: string) => {
-
-  if (quality.includes("1080") ||quality.includes("2160")) return "mdi-video-high-definition";
+  if (quality.includes("1080") || quality.includes("2160")) return "mdi-video-high-definition";
   return "mdi-download";
 };
 </script>
+
 
 
 <style scoped>
