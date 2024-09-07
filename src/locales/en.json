@@ -1,0 +1,71 @@
+{
+  "select_language": "Select Language",
+  "navbar": {
+    "home": "Home",
+    "search": "Search",
+    "saves": "Saves"
+  },
+ "genres": {
+    "all": "All",
+    "action": "Action",
+    "comedy": "Comedy",
+    "drama": "Drama",
+    "horror": "Horror",
+    "thriller": "Thriller",
+    "romance": "Romance",
+    "mystery": "Mystery",
+    "crime": "Crime",
+    "adventure": "Adventure",
+    "fantasy": "Fantasy",
+    "animation": "Animation",
+    "family": "Family",
+    "biography": "Biography",
+    "documentary": "Documentary",
+    "history": "History",
+    "war": "War",
+    "music": "Music",
+    "sport": "Sport",
+    "western": "Western",
+    "sci-fi": "Sci-Fi"
+  },
+  "movieSections": {
+    "byRating": "By Rating",
+    "byDownload": "By Download",
+    "comingSoon": "Coming Soon",
+    "mostPopular": "The Most Popular"
+  },
+  "movieDetails": {
+    "info": "Info",
+    "trailer": "Trailers",
+    "about": "About",
+    "runtime": "Runtime",
+    "language": "Language",
+    "mpaRating": "MPA Rating",
+    "year": "Year",
+    "uploadedOn": "Uploaded on",
+    "state": "State",
+    "viewOnIMDB": "View on IMDb",
+    "minutes": "minutes",
+    "downloadOptions": "Download Options",
+    "torrentLinks": "Torrent Links",
+    "relatedMovies": "Related Movies"},
+    "buttons": {
+      "selectLanguage": "Select Language"
+    },
+    "pagination": {
+      "next": "Next",
+      "previous": "Previous"
+    },
+    
+        "searchPage": {
+          "searchMovies": "Search for movies",
+          "noResults": "No results found for",
+          "resultsFound": "Found {count} results for"
+        }, "saves": {
+            "saved": "Saved",
+            "noMovies": "You haven't added any movies to your save list yet.",
+            "startAdding": "Start adding your favorite movies now!"
+          }
+        
+  }
+  

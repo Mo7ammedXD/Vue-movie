@@ -6,7 +6,7 @@
         :loading="isFetchingPeers"
         density="compact"
         variant="outlined"
-        label="Search for movies"
+        :label="$t('searchPage.searchMovies')" 
         append-inner-icon="mdi-magnify"
         clearable
         single-line
@@ -16,34 +16,31 @@
     </v-card-text>
 
     <v-container class="bg-movie">
-      <h2 class="text-white">Search</h2>
+      <h2 class="text-white">{{ $t('searchPage.searchMovies') }}</h2> 
 
       <p v-if="search?.length" class="text-white mb-2">
-        Found {{ totalResults }} results for "{{ userSearch }}"
+        {{ $t('searchPage.resultsFound', { count: totalResults }) }} "{{ userSearch }}"
       </p>
       <p v-if="!search?.length && !isFetchingPeers && userSearch" class="text-white">
-        No results found for "{{ userSearch }}"
+        {{ $t('searchPage.noResults') }} "{{ userSearch }}"
       </p>
 
       <v-row no-gutters>
         <div v-for="movie in search" :key="movie.id" class="item mb-3">
           <MovieCard :movie="movie" ></MovieCard>
         </div>
-        <v-row justify="center" class="mt-4 ">
-        <v-pagination
-          v-if="totalPages > 1 && search?.length"
-          v-model="page"
-          :length="totalPages"
-          total-visible="6"
-          @input="onPageChange"
-        ></v-pagination>
-      </v-row>
-      </v-row>
-
       
+      </v-row>
+      <v-pagination
+        v-if="totalPages > 1"
+        v-model="page"
+        :length="totalPages"
+        @input="onPageChange"
+      ></v-pagination>
     </v-container>
   </v-card>
 </template>
+
 
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";

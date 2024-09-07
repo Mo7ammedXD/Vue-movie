@@ -1,70 +1,83 @@
 <template>
-    <v-app>
-      <v-main>
-        <transition :name="transitionName" mode="out-in">
-          <router-view :key="$route.fullPath" />
-        </transition>
-      </v-main>
+  <v-app :dir="appDirection">
+    <v-main>
       <NavBar />
-    </v-app>
-  </template>
+      <router-view v-slot="{ Component }" >
+        <transition :name="transitionName" mode="out-in"> 
+          <component :is="Component" />
+        </transition>
+      </router-view>
+    </v-main>
+  </v-app>
+</template>
 
+<script setup lang="ts">
+import { computed, ref, watch } from "vue";
+import { useRoute } from "vue-router";
+import { useI18n } from "vue-i18n";
+import NavBar from "@/components/navBar/NavBar.vue";
+import { useNavItems } from "@/helper/navBar";
 
-  <script lang="ts" setup>
-  import { computed } from "vue";
-  import NavBar from "@/components/footer/NavBar.vue";
-  import { useRoute } from "vue-router";
-  
-  const route = useRoute();
-  
-  const transitionName = computed(() => {
-    window.scroll({
-  top: 0,
-  behavior: 'smooth', 
-});
-    switch (route.name) {
-      case "Home":
-        return "slide-right"; 
-      case "Search":
-        return "slide-left";  
-      case "MovieDetail":
-        return "slide-up";       
-      case "Saves":
-        return "slide-left";   
-      default:
-        return "fade";        
-    }
+const { locale } = useI18n();
 
+const appDirection = computed(() => (locale.value === 'ar' ? 'rtl' : 'ltr')); 
+
+const route = useRoute();
+const { navItems, currentNavIndex } = useNavItems(); 
+const previousIndex = ref<number | null>(null);
+
+const transitionName = computed(() => {
+  window.scroll({
+    top: 0,
+    behavior: 'smooth', 
   });
-  </script>
-  
-  <style>
-  .slide-right-enter-active, .slide-right-leave-active {
-    transition: transform 0.2 ease;
+
+  if (route.name === "MovieDetail") {
+    return "fade"; 
   }
-  .slide-right-enter, .slide-right-leave-to {
-    transform: translateX(100%);
+
+  if (previousIndex.value === null) {
+    return "fade"; 
+  } else if (currentNavIndex.value < previousIndex.value && locale.value === "en" || currentNavIndex.value > previousIndex.value && locale.value === "ar") {
+    return "slide-left"; 
+  } else if (currentNavIndex.value > previousIndex.value && locale.value === "en" || currentNavIndex.value < previousIndex.value && locale.value === "ar") {
+    return "slide-right"; 
+  } else {
+    return "slide-up"; 
   }
-  
-  .slide-left-enter-active, .slide-left-leave-active {
-    transition: transform 0.2s ease;
-  }
-  .slide-left-enter, .slide-left-leave-to {
-    transform: translateX(-100%);
-  }
-  
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity 0.3s ease-in-out;
-  }
-  .fade-enter, .fade-leave-to {
-    opacity: 0;
-  }
-  
-  .slide-up-enter-active, .slide-up-leave-active {
-    transition: transform 0.4s ease;
-  }
-  .slide-up-enter, .slide-up-leave-to {
-    transform: translateY(100%);
-  }
-  </style>
-  
+});
+
+watch(currentNavIndex, (newIndex, oldIndex) => {
+  previousIndex.value = oldIndex; 
+});
+</script>
+
+<style>
+.slide-left-enter-active, .slide-left-leave-active {
+  transition: transform 0.4s ease;
+}
+.slide-left-enter, .slide-left-leave-to {
+  transform: translateX(100%);
+}
+
+.slide-right-enter-active, .slide-right-leave-active {
+  transition: transform 0.4s ease;
+}
+.slide-right-enter, .slide-right-leave-to {
+  transform: translateX(-100%);
+}
+
+.slide-up-enter-active, .slide-up-leave-active {
+  transition: transform 0.1s ease;
+}
+.slide-up-enter, .slide-up-leave-to {
+  transform: translateY(100%);
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+</style>

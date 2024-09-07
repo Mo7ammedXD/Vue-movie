@@ -1,0 +1,70 @@
+{
+  "select_language": "اختر اللغة",
+    "navbar": {
+      "home": "الرئيسية",
+      "search": "البحث",
+      "saves": "المحفوظات"
+    },
+    "genres": {
+      "all": "الكل",
+      "action": "أكشن",
+      "comedy": "كوميديا",
+      "drama": "دراما",
+      "horror": "رعب",
+      "thriller": "إثارة",
+      "romance": "رومانسي",
+      "mystery": "غموض",
+      "crime": "جريمة",
+      "adventure": "مغامرة",
+      "fantasy": "خيال",
+      "animation": "رسوم متحركة",
+      "family": "عائلي",
+      "biography": "سيرة ذاتية",
+      "documentary": "وثائقي",
+      "history": "تاريخ",
+      "war": "حرب",
+      "music": "موسيقى",
+      "sport": "رياضة",
+      "western": "غربي",
+      "sci-fi": "خيال علمي"
+    } ,
+    "movieSections": {
+      "byRating": "حسب التقييم",
+      "byDownload": "حسب التحميل",
+      "comingSoon": "القريباً",
+      "mostPopular": "الأكثر شهرة"
+    },
+    "movieDetails": {
+        "info": "معلومات",
+        "trailer": "المقاطع الدعائية",
+        "about": "حول",
+        "runtime": "مدة التشغيل",
+        "language": "اللغة",
+        "mpaRating": "تصنيف MPA",
+        "year": "السنة",
+        "uploadedOn": "تم الرفع في",
+        "state": "الحالة",
+        "viewOnIMDB": "مشاهدة على IMDb",
+        "minutes": "دقائق",
+        "downloadOptions": "خيارات التحميل",
+        "torrentLinks": "روابط التورنت",
+        "relatedMovies": "أفلام ذات صلة"
+      },
+    "buttons": {
+      "selectLanguage": "اختر اللغة"
+    },
+    "pagination": {
+      "next": "التالي",
+      "previous": "السابق"
+    },
+    "searchPage": {
+        "searchMovies": "البحث عن أفلام",
+        "noResults": "لم يتم العثور على نتائج لـ",
+        "resultsFound": "تم العثور على {count} نتائج لـ"
+      }, "saves": {
+        "saved": "المحفوظات",
+    "noMovies": "لم تقم بإضافة أي أفلام إلى قائمة المحفوظات بعد.",
+    "startAdding": "ابدأ بإضافة أفلامك المفضلة الآن!"
+      }
+  }
+  

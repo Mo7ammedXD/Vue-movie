@@ -1,24 +1,14 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", "Rubik";
-
-}
-.body{
-  color: white;
-  background-color: black;
-
-}
+ 
 .text-poppins{
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins","Zain", sans-serif;
 }
 .v-main{
   background-color: black;
 }
 body {
+    
     color: black;
-    font-family: "Poppins", sans-serif;
+    font-family: "Poppins","Zain", sans-serif;
 
   }
   .bg-black {
@@ -165,6 +155,4 @@ body {
   border-radius: 10px;
   background: #eaeaea1c;
 }
-
-
 
