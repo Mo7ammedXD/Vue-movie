@@ -1,15 +1,15 @@
  
-.text-poppins{
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: "Poppins","Zain", sans-serif;
 }
 .v-main{
   background-color: black;
 }
 body {
-    
     color: black;
-    font-family: "Poppins","Zain", sans-serif;
-
   }
   .bg-black {
     background-color: black;
