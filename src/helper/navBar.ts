@@ -2,11 +2,12 @@ import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 interface NavItem {
-  icon: string;
   name: string;
+  icon: string;
   route: string;
   isActive: () => boolean;
 }
+
 
 export const useNavItems = () => {
   const route = useRoute();

@@ -5,31 +5,15 @@ import '@/assets/main.css'
 import { createApp, watch } from "vue";
 import { createPinia } from "pinia";
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-import { createI18n } from "vue-i18n";
-import en from "@/locales/en.json";
-import ar from "@/locales/ar.json";
+import i18n from "./helper/i18n";
 import vuetify from "./plugins/vuetify";
 
 const app = createApp(App);
-
-
-
-const i18n = createI18n({
-    legacy: false, 
-    locale: 'ar', 
-    fallbackLocale: 'ar', 
-    messages: {
-      en,
-      ar,
-    },
-  });
   
 
-
-
-app.use(i18n);
 registerPlugins(app);
 app.use(createPinia().use(piniaPluginPersistedstate))
-app.use
+app.use(vuetify)
+app.use(i18n);
 app.use(VueQueryPlugin);
 app.mount("#app");
