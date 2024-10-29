@@ -32,7 +32,7 @@
 
   <v-bottom-navigation
     v-if="isMobile"
-    class="bg-black pb-1 pt-1"
+    class="bg-black"
     grow
     hide-on-scroll
   >
