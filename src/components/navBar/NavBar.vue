@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar class="bg-black">
+  <v-app-bar class="bg-black safe-area-top">
     <v-toolbar-title v-once>
       <span class="text-yellow">XD</span>MOVIE
     </v-toolbar-title>
@@ -30,9 +30,12 @@
     </template>
   </v-app-bar>
 
+  <div class="main-content safe-area-bottom">
+  </div>
+
   <v-bottom-navigation
     v-if="isMobile"
-    class="bg-black"
+    class="bg-black safe-area-bottom"
     grow
     hide-on-scroll
   >
@@ -43,7 +46,6 @@
       icon
       :class="getButtonClass(item)"
     >
-
       <v-icon :size="iconSize">{{ item.icon }}</v-icon>
     </v-btn>
   </v-bottom-navigation>
@@ -76,6 +78,8 @@ import { useDisplay } from 'vuetify';
 import { useNavItems } from '@/helper/navBar';
 import { useI18n } from 'vue-i18n';
 import i18n from '@/helper/i18n';
+import { SafeArea } from '@capacitor-community/safe-area';
+import { Capacitor } from '@capacitor/core';
 
 type Locale = 'en' | 'ar';
 
@@ -96,11 +100,22 @@ const languages: Language[] = [
   { code: 'ar', name: 'العربية' },
 ];
 
-onMounted(() => {
+onMounted(async () => {
   const storedLang = localStorage.getItem('locale');
-  const lang: Locale =
-    storedLang === 'en' || storedLang === 'ar' ? storedLang : 'en';
+  const lang: Locale = storedLang === 'en' || storedLang === 'ar' ? storedLang : 'en';
   changeLocale(lang);
+
+  if (Capacitor.getPlatform() === 'android') {
+    SafeArea.disable({
+      config: {
+        customColorsForSystemBars: true,
+        statusBarColor: '#00000000', 
+        statusBarContent: 'light',
+        navigationBarColor: '#00000000', 
+        navigationBarContent: 'dark',
+      },
+    });
+  }
 });
 
 const changeLocale = async (lang: Locale) => {
@@ -127,10 +142,10 @@ const getButtonClass = (item: any) => {
   };
 };
 
-const iconSize = '28px'; 
+const iconSize = '28px';
 </script>
 
-<style scoped>
+<style>
 .bg-yellow {
   background-color: #ffeb3b !important;
 }
@@ -139,5 +154,13 @@ const iconSize = '28px';
 }
 .text-white {
   color: #fff !important;
+}
+
+.safe-area-top {
+  margin-top: env(safe-area-inset-top, var(--safe-area-inset-top, 0px));
+}
+
+.safe-area-bottom {
+  margin-bottom: env(safe-area-inset-bottom, var(--safe-area-inset-bottom, 0px));
 }
 </style>

@@ -3,7 +3,7 @@
     <v-main>
       <NavBar />
       <keep-alive :include="cachedViews">
-        <router-view v-slot="{ Component }">
+        <router-view class="mt-2 " v-slot="{ Component }">
           <transition :name="transitionName" mode="out-in">
             <component :is="Component" />
           </transition>
