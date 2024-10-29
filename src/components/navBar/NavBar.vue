@@ -3,7 +3,6 @@
     <v-toolbar-title v-once>
       <span class="text-yellow">XD</span>MOVIE
     </v-toolbar-title>
-
     <template v-if="isMobile">
       <v-spacer></v-spacer>
       <v-btn @click="toggleDrawer" icon>
@@ -30,12 +29,12 @@
     </template>
   </v-app-bar>
 
-  <div class="main-content safe-area-bottom">
+  <div class="main-content ">
   </div>
 
   <v-bottom-navigation
     v-if="isMobile"
-    class="bg-black safe-area-bottom"
+    class="bg-black "
     grow
     hide-on-scroll
   >
@@ -110,7 +109,7 @@ onMounted(async () => {
       config: {
         customColorsForSystemBars: true,
         statusBarColor: '#00000000', 
-        statusBarContent: 'light',
+        statusBarContent: 'dark',
         navigationBarColor: '#00000000', 
         navigationBarContent: 'dark',
       },
@@ -156,11 +155,5 @@ const iconSize = '28px';
   color: #fff !important;
 }
 
-.safe-area-top {
-  margin-top: env(safe-area-inset-top, var(--safe-area-inset-top, 0px));
-}
 
-.safe-area-bottom {
-  margin-bottom: env(safe-area-inset-bottom, var(--safe-area-inset-bottom, 0px));
-}
 </style>

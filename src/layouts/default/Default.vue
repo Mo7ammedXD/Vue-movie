@@ -1,9 +1,9 @@
 <template>
-  <v-app :dir="appDirection">
+  <v-app :dir="appDirection" class="safe-area-bottom">
     <v-main>
       <NavBar />
       <keep-alive :include="cachedViews">
-        <router-view class="mt-2 " v-slot="{ Component }">
+        <router-view v-slot="{ Component }">
           <transition :name="transitionName" mode="out-in">
             <component :is="Component" />
           </transition>
@@ -14,11 +14,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import NavBar from '@/components/navBar/NavBar.vue';
 import { useNavItems } from '@/helper/navBar';
+import { Capacitor } from '@capacitor/core';
+import { SafeArea } from '@capacitor-community/safe-area';
 
 const { locale } = useI18n();
 const appDirection = computed(() => (locale.value === 'ar' ? 'rtl' : 'ltr'));
@@ -32,7 +34,7 @@ const isFirstLoad = computed(() => previousIndex.value === null);
 
 const isForwardNavigation = computed(() => {
   if (previousIndex.value === null) {
-    return false; 
+    return false;
   }
   return (
     (currentNavIndex.value > previousIndex.value && locale.value === 'en') ||
@@ -48,11 +50,12 @@ const transitionName = computed(() => {
 });
 
 watch(
-  () => route.name,
+  () => route.query,
   () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 );
+
 
 watch(currentNavIndex, (newIndex, oldIndex) => {
   if (oldIndex !== undefined && newIndex !== oldIndex) {
@@ -61,11 +64,25 @@ watch(currentNavIndex, (newIndex, oldIndex) => {
 });
 
 const cachedViews = ref(['HomeView', 'ProfileView']);
+
+
+onMounted(() => {
+  if (Capacitor.getPlatform() === 'android') {
+    SafeArea.enable({
+      config: {
+        customColorsForSystemBars: true,
+        statusBarColor: '#00000000', 
+        statusBarContent: 'light',
+        navigationBarColor: '#00000000',
+        navigationBarContent: 'light',
+      },
+    });
+  }
+});
 </script>
 
-
-
 <style>
+
 .slide-left-enter-active,
 .slide-left-leave-active {
   transition: transform 0.4s ease;
@@ -91,5 +108,13 @@ const cachedViews = ref(['HomeView', 'ProfileView']);
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.safe-area-top {
+  padding-top: env(safe-area-inset-top, var(--safe-area-inset-top, 0px));
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, var(--safe-area-inset-bottom, 0px));
 }
 </style>
