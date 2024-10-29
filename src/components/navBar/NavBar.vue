@@ -27,8 +27,7 @@
       :key="item.name"
       :class="{ 'bg-yellow': item.isActive() }"
       :to="item.route"
-      flat
-      
+      flat  
     >
       <v-icon left>{{ item.icon }}</v-icon> 
       {{ $t(`navbar.${item.name}`) }} 

@@ -6,7 +6,6 @@
 import { useLocale } from 'vuetify';
 import { useI18n } from "vue-i18n";
 import { onMounted, watch } from 'vue';  
-import { on } from 'events';
 
 const { current } = useLocale();
 const { locale } = useI18n();

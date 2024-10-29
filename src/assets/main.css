@@ -126,10 +126,7 @@ body {
 .fa0-5x{
   font-size: 0.6em;
 }
-.d-grid-center{
-  display: grid;
-  justify-content: center;
-}
+
 .itmes {
   display: flex;
   width: 100%;
