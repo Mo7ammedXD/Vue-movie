@@ -4,7 +4,7 @@ const config: CapacitorConfig = {
   appId: 'com.example.app',
   appName: 'vue-movie',
   webDir: 'dist',
-  bundledWebRuntime: false,
+  plugins: {},
 };
 
 export default config;
