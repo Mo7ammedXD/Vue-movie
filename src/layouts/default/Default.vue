@@ -1,5 +1,5 @@
 <template>
-  <v-app :dir="appDirection" class="safe-area-bottom">
+  <v-app :dir="appDirection" >
     <v-main>
       <NavBar />
       <keep-alive :include="cachedViews">
@@ -19,8 +19,6 @@ import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import NavBar from '@/components/navBar/NavBar.vue';
 import { useNavItems } from '@/helper/navBar';
-import { Capacitor } from '@capacitor/core';
-import { SafeArea } from '@capacitor-community/safe-area';
 
 const { locale } = useI18n();
 const appDirection = computed(() => (locale.value === 'ar' ? 'rtl' : 'ltr'));
@@ -66,19 +64,7 @@ watch(currentNavIndex, (newIndex, oldIndex) => {
 const cachedViews = ref(['HomeView', 'ProfileView']);
 
 
-onMounted(() => {
-  if (Capacitor.getPlatform() === 'android') {
-    SafeArea.enable({
-      config: {
-        customColorsForSystemBars: true,
-        statusBarColor: '#00000000', 
-        statusBarContent: 'light',
-        navigationBarColor: '#00000000',
-        navigationBarContent: 'light',
-      },
-    });
-  }
-});
+
 </script>
 
 <style>
@@ -110,11 +96,5 @@ onMounted(() => {
   opacity: 0;
 }
 
-.safe-area-top {
-  padding-top: env(safe-area-inset-top, var(--safe-area-inset-top, 0px));
-}
 
-.safe-area-bottom {
-  padding-bottom: env(safe-area-inset-bottom, var(--safe-area-inset-bottom, 0px));
-}
 </style>

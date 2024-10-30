@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar class="bg-black safe-area-top">
+  <v-app-bar class="bg-black">
     <v-toolbar-title v-once>
       <span class="text-yellow">XD</span>MOVIE
     </v-toolbar-title>
@@ -77,8 +77,7 @@ import { useDisplay } from 'vuetify';
 import { useNavItems } from '@/helper/navBar';
 import { useI18n } from 'vue-i18n';
 import i18n from '@/helper/i18n';
-import { SafeArea } from '@capacitor-community/safe-area';
-import { Capacitor } from '@capacitor/core';
+
 
 type Locale = 'en' | 'ar';
 
@@ -104,17 +103,7 @@ onMounted(async () => {
   const lang: Locale = storedLang === 'en' || storedLang === 'ar' ? storedLang : 'en';
   changeLocale(lang);
 
-  if (Capacitor.getPlatform() === 'android') {
-    SafeArea.disable({
-      config: {
-        customColorsForSystemBars: true,
-        statusBarColor: '#00000000', 
-        statusBarContent: 'dark',
-        navigationBarColor: '#00000000', 
-        navigationBarContent: 'dark',
-      },
-    });
-  }
+
 });
 
 const changeLocale = async (lang: Locale) => {
