@@ -1,5 +1,6 @@
 <template>
-  <router-view />
+
+    <router-view></router-view>
 </template>
 
 <script setup lang="ts">
@@ -12,7 +13,10 @@ const { locale } = useI18n();
 onMounted(() => {
   const lang = localStorage.getItem('locale') || 'en';
   current.value = lang;
+
+
 });
+
 
 watch(locale, () => {
   current.value = locale.value;  

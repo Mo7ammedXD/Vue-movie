@@ -1,5 +1,5 @@
 <template>
-  <v-app :dir="appDirection" >
+  <v-app :dir="appDirection"  >
     <v-main>
       <NavBar />
       <keep-alive :include="cachedViews">

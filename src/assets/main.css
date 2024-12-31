@@ -8,12 +8,14 @@
 
 
 
-
 .v-main{
   background-color: black;
 }
 body {
     color: black;
+    padding: 12px;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
   .bg-black {
     background-color: black;

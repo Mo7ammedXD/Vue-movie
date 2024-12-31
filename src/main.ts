@@ -2,7 +2,7 @@ import { registerPlugins } from "@/plugins";
 import App from "./App.vue";
 import { VueQueryPlugin  } from "@tanstack/vue-query";
 import '@/assets/main.css'
-import { createApp, watch } from "vue";
+import { createApp } from "vue";
 import { createPinia } from "pinia";
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import i18n from "./helper/i18n";
