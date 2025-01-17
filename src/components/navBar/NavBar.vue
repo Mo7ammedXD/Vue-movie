@@ -1,3 +1,72 @@
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue';
+import { useDisplay } from 'vuetify';
+import { useNavItems } from '@/helper/navBar';
+import { useI18n } from 'vue-i18n';
+import i18n from '@/helper/i18n';
+
+import en from "@/locales/en.json";
+import ar from "@/locales/ar.json";
+
+const messagesMap = {
+  en,
+  ar,
+};
+
+type Locale = 'en' | 'ar';
+
+const { navItems } = useNavItems();
+const { width } = useDisplay();
+
+const { locale } = useI18n();
+const currentLocale = computed(() => locale.value);
+
+const drawer = ref(false);
+
+const isMobile = computed(() => width.value < 600);
+
+type Language = { code: Locale; name: string };
+
+const languages: Language[] = [
+  { code: 'en', name: 'English' },
+  { code: 'ar', name: 'العربية' },
+];
+
+onMounted(() => {
+  const storedLang = localStorage.getItem('locale') as Locale;
+  const lang: Locale = storedLang === 'en' || storedLang === 'ar' ? storedLang : 'en';
+  changeLocale(lang);
+});
+
+const changeLocale = (lang: Locale) => {
+  if (!i18n.global.availableLocales.includes(lang)) {
+    loadLocaleMessages(lang);
+  }
+  locale.value = lang;
+  localStorage.setItem('locale', lang);
+};
+
+const loadLocaleMessages = (lang: Locale) => {
+  if (messagesMap[lang]) {
+    i18n.global.setLocaleMessage(lang, messagesMap[lang]);
+  }
+};
+
+const toggleDrawer = () => {
+  drawer.value = !drawer.value;
+};
+
+const getButtonClass = (item: any) => {
+  return {
+    'bg-yellow text-black': item.isActive(),
+    'text-white': !item.isActive(),
+  };
+};
+
+const iconSize = '28px';
+</script>
+
+
 <template>
   <v-app-bar class="bg-black">
     <v-toolbar-title v-once>
@@ -71,67 +140,6 @@
   </v-navigation-drawer>
 </template>
 
-<script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
-import { useDisplay } from 'vuetify';
-import { useNavItems } from '@/helper/navBar';
-import { useI18n } from 'vue-i18n';
-import i18n from '@/helper/i18n';
-
-
-type Locale = 'en' | 'ar';
-
-const { navItems } = useNavItems();
-const { width } = useDisplay();
-
-const { locale } = useI18n();
-const currentLocale = computed(() => locale.value);
-
-const drawer = ref(false);
-
-const isMobile = computed(() => width.value < 600);
-
-type Language = { code: Locale; name: string };
-
-const languages: Language[] = [
-  { code: 'en', name: 'English' },
-  { code: 'ar', name: 'العربية' },
-];
-
-onMounted(async () => {
-  const storedLang = localStorage.getItem('locale');
-  const lang: Locale = storedLang === 'en' || storedLang === 'ar' ? storedLang : 'en';
-  changeLocale(lang);
-
-
-});
-
-const changeLocale = async (lang: Locale) => {
-  if (!i18n.global.availableLocales.includes(lang)) {
-    await loadLocaleMessages(lang);
-  }
-  locale.value = lang;
-  localStorage.setItem('locale', lang);
-};
-
-const loadLocaleMessages = async (lang: Locale) => {
-  const messages = await import(`@/locales/${lang}.json`);
-  i18n.global.setLocaleMessage(lang, messages.default);
-};
-
-const toggleDrawer = () => {
-  drawer.value = !drawer.value;
-};
-
-const getButtonClass = (item: any) => {
-  return {
-    'bg-yellow text-black': item.isActive(),
-    'text-white': !item.isActive(),
-  };
-};
-
-const iconSize = '28px';
-</script>
 
 <style>
 .bg-yellow {

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { defineProps, onMounted, ref, watch } from 'vue';
+import {  onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router'; 
 import type { Movie } from "@/types/Movie";
 import { useSaveMovieStore } from '@/store/saves';
