@@ -101,11 +101,11 @@
             </v-row>
           </v-card>
 
-          <v-card color="black" class="py-8" :loading="isFetchingRelated">
+          <v-card color="black" class="py-8 " :loading="isFetchingRelated">
             <div class="ma-4 mb-4 bg-movie mb-10 pa-6">
               <v-card-title class="text-white">{{ $t('movieDetails.relatedMovies') }}</v-card-title>
               <div class="horizontal-scroll d-flex">
-                <div v-for="movie in relatedMovies" :key="movie.id" class="item me-4">
+                <div v-for="movie in relatedMovies" :key="movie.id" class="item me-4  my-3">
                   <MovieCard :movie="movie"></MovieCard>
                 </div>
               </div>
