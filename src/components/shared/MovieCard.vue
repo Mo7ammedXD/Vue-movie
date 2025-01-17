@@ -47,11 +47,9 @@ watch(movies, (newMovies) => {
 
 
 <template>
-    <v-skeleton-loader v-if="isFetching" type="card"></v-skeleton-loader>
 
   <v-card
-    v-else
-    @click="navigateToMovie" 
+  @click="navigateToMovie" 
     class="bg-yellow ma-1"
     :image="movie.medium_cover_image"
     max-width="300"
@@ -70,7 +68,7 @@ watch(movies, (newMovies) => {
 
 
 
-  <div class="movie-info mt-2" v-if="!isFetching">
+  <div class="movie-info mt-2">
     
     <v-card-title class="text-wrap title">
       <h6 class="text-white">{{ movie.title }}</h6>
