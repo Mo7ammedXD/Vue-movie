@@ -53,7 +53,7 @@ watch(movies, (newMovies) => {
     v-else
     @click="navigateToMovie" 
     class="bg-yellow ma-1"
-    :image="movie.large_cover_image"
+    :image="movie.medium_cover_image"
     max-width="300"
     height="240"
     min-height="240"

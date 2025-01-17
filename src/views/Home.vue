@@ -102,7 +102,7 @@ watch(genre, () => {
     <div class="ma-4 mb-4 mb-10 pa-6">
       <h2 class="text-white">{{ $t('movieSections.comingSoon') }}</h2> 
       <v-carousel color="primary" height="400" width="600" show-arrows="hover" cycle hide-delimiter-background>
-        <v-carousel-item v-for="slide in data?.byAddDate" :key="slide.id" :src="slide.large_cover_image"></v-carousel-item>
+        <v-carousel-item v-for="slide in data?.byAddDate" :key="slide.id" :src="slide?.large_cover_image"></v-carousel-item>
       </v-carousel>
     </div>
 
