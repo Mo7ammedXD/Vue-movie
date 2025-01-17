@@ -61,12 +61,20 @@ const comingSoonQuery = useInfiniteQuery({
 
 const handleScroll = (event: Event, query: any) => {
   const target = event.target as HTMLElement;
-  if (target.scrollLeft + target.clientWidth >= target.scrollWidth - 10) {
+  const isRTL = getComputedStyle(target).direction === 'rtl';
+
+  let scrollPosition = target.scrollLeft;
+  if (isRTL) {
+    scrollPosition = Math.abs(target.scrollLeft);
+  }
+
+  if (scrollPosition + target.clientWidth >= target.scrollWidth - 10) {
     if (!query.isFetching.value && query.hasNextPage.value) {
       query.fetchNextPage();
     }
   }
 };
+
 
 onMounted(() => {
   nextTick(() => {
